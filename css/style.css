@@ -1,0 +1,64 @@
+p {
+	align: justify;
+}
+
+.bar {
+  fill: teal;
+}
+
+/*.bar:hover {
+  fill: brown;
+}*/
+
+.axis--x path {
+  display: none;
+}
+
+.axis--x {
+  font-family: Roboto;
+  font-size: 12px;
+}
+
+.area {
+  fill: steelblue;
+  clip-path: url(#clip);
+}
+
+.zoom {
+  cursor: move;
+  fill: none;
+  pointer-events: all;
+}
+
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+-tooltip {
+	position: absolute;
+	width: 200px;
+	height: auto;
+	padding: 10px;
+	background-color: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); 
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); 
+	pointer-events: none;
+}

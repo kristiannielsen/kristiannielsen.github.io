@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Social Data Analysis and Visualization: Assignment 2">
+    <meta name="author" content="Kristian Nielsen">
+
+    <title>Final Project</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- D3 reference -->
+    <script type="text/javascript" src="d3/d3.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!-- JS scripts for visualisations-->
+    <script type="text/javascript" src="js/hourly_dist_barchart.js" async></script>
+    <script type="text/javascript" src="js/area_chart.js" async></script>
+    <script type="text/javascript" src="js/k_means.js" async></script>
+    <script type="text/javascript" src="js/info_map.js" async></script>
+
+
+    <!-- Custom CSS scripts -->
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- <div class="header clearfix"> -->
+        <!-- <h3 class="text-muted">Social Data Analysis and Visualization (02806) 2017</h3> -->
+      <!-- </div> -->
+
+      <div class="jumbotron">
+        <!-- <h1>Final Project</h1> -->
+        <h2>New York City Vehicle Collision Analysis<h2>
+        <!-- <h3>Final Project - Social Data Analysis and Visualization<h3>  -->
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+          <!-- Introduction section -->
+          <h2>Introduction</h2>
+          <p align="justify">
+            The last few years, New York City has had major focus on decreasing the number of people being injured and killed in traffic accidents.
+          </p>
+          <p align="justify">
+            Traffic accidents in New York city is a big concern. There were more than 200.000 accidents last year resulting in 231 deaths and thousands of injuries.</p>
+          <p align="justify">
+            Five years ago, the New York Mayor initiated a programme called “Vision Zero” whose ultimate goal is zero deaths in traffic accidents by 2024.
+          </p>
+          <p align="justify">
+          I thought it could be interesting to investigate historical data from NYPD about vehicle collisions to aid the vision of zero deaths in 2024. 
+          </p>
+          <p align="justify">
+          Doing an exploratory analysis, it could maybe be possible to see what initiatives have helped, if there are any “hubs” of traffic accidents, where future emergency stations could be placed to lower the response time (which would most likely lead to fewer deaths), if one could predict the number of accidents to schedule manpower and similar interesting questions.
+          </p> 
+          <p align="justify">
+          Likewise, it would be interesting to find certain locations within each of the boroughs where accidents happen more often to recommend safety measures to be enforced. And could the reasons behind the accidents help more targeted information campaigns?
+
+          </p>
+          Some of theses questions will be answered here along with a presentation of other interesting insight found during the time spend on the project.
+          <p align="justify">
+          </p>
+          <!-- Data section  -->
+          <h2>The Data</h2>
+
+          <p align="justify">
+          The entire data set consists of more than 1M rows with 29 columns. It contains information of all the incidents happening in New York City from June 2012 up till today collected by the NYPD. It is publicly available <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95">here</a> via NYC OpenData.</p>
+          <p align="justify">
+          For the purpose of this analysis and all the visualisations, only the complete years from 2013-2016 is used. And from now on "the data" will refer those complete years.
+          </p>
+          <p align="justify">
+            On the following map, one can get an overview of the where the accidents happen and be come familiar with the borough names that will be mentioned several times moving forward.
+          </p>
+          <div class="text-center" style="text-align: center;">
+            <p><i>Hover on the count of incidents in one of the boroughs to see the name it.</i></p>
+            <svg id="infomap" width="500" height="500"></svg>
+          </div>
+          <p align="justify">
+          The data contains geospatial data, which is always interesting to visualise. Below, one can see a heat map of all the incidents in the data. It clearly shows hot spots in Manhattan, but also really dense areas in e.g. Brooklyn.
+          </p>
+          <BR/>
+          <figure >
+            <img src="images/kde_all_zoomed_out.png" style="max-width: 100%">
+            <figcaption align="middle">Fig 1. - Accident distribution in NYC from 2013 to 2016.</figcaption>
+          </figure>
+          <BR/>          
+          <p align="justify">
+            Other peaks can be found, if one looks at a subset of the data like below where a heat map of Brooklyn only is shown. Suddenly, it becomes evident that there are other peaks if you "zoom" in on the data.
+          </p>
+          <BR/>          
+          <figure >
+            <img src="images/kde_brooklyn.gif" style="max-width: 100%">
+            <figcaption align="middle">Fig 2. - Accident distribution in Brooklyn from 2013 to 2016.</figcaption>
+          </figure>
+          <BR/>
+          <p align="justify">
+            The data also contains time stamps which is also very interesting. Once again, different patterns in the data shows if it is divided in subsets. Below, a bar chart displays the distribution of the incidents of an hourly basis.  
+          </p>
+          <BR/>
+          <div class="text-center" style="text-align: center;">
+          <p> Click anywhere on the barchart to toggle between weekdays and weekends.</p>
+            <svg id="barchart" width="700" height="400"></svg>
+          </div>
+          <BR/>
+          <p align="justify"> The exact date is also available for each incident, which makes it possible to do timeline of the data. The following area chart displays the number of accidents for every day. If one zoomz, the repeating pattern becomes visible. Or zoom to specfic outlier and maybe find out more by googling the date.
+          <div class="text-center" style="text-align: center;">
+          <BR/>          
+           <i>Zoom on the chart to view as specific timeframe and brush on miniature chart to move the timeframe.</i></p>
+            <BR/>          
+
+            <svg id="areachart" width="700" height="500"></svg>
+          </div>
+
+          <!-- Analysis section -->
+
+          <h2>Analysis</h2>
+          <h3>K-means</h3>
+          <p align="justify">The map visualizes the results of the K-means algorithm (described in Part 2 of the Explainer notebook) with k = 2..6 that has been run on the incident data in Brooklyn with contributing factor being <i>Pavement Slippery</i>. As mentioned in the explainer notebook, the apparent best fitting number of clusters are 4 or 5. One can toggle between the different results by clicking one of the 5 buttons. By hovering above one of the buttons, a preview of that result will be shown on the map. The centroids of each of the results are indicated by the black rings. </p>
+  
+          <div class="text-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default kmeans" id="k2" value="2" >k = 2</button>
+              <button type="button" class="btn btn-default kmeans" id="k3" value="3" >k = 3</button>
+              <button type="button" class="btn btn-default kmeans" id="k4" value="4" >k = 4</button>
+              <button type="button" class="btn btn-default kmeans" id="k5" value="5" >k = 5</button>
+              <button type="button" class="btn btn-default kmeans" id="k6" value="6" >k = 6</button>
+            </div>
+            <div id="map" style="max-width: 100%"></div>
+          </div>
+
+        <BR/>
+        <h3>Regression</h3>
+        <p align="justify">
+        To predict the number of accidents happening in a given hour on given date in specific borough, regression analysis was utilised. The regression was performed on a subset of the data set features. One can imageine a working model like this being very beneficial to the local government, the police and of course Vision Zero. If it is possible to say something about the amount accidents in a given bouroug in specific hour, then you could optimize on whole variety of parameters including manpower in the police precincts, where to patrol, or where to perform proactive initiative. With more data e.g. about the weather, it would be possible to say something about the number of accidents to be expected during a storm and againg measures could be taken beforehand. </p>
+        <p>
+        In the table below is a an overview of the two types used for this project and their performance. </p>
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+          <th>Regressor</th>
+          <th>R-squared performance</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+          <td>RandomForestRegressor</td>
+          <td>0.82</td>
+          </tr>
+
+          <tr>
+          <td>MLPRegressor</td>
+          <td>0.84</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <p align="justify">
+          By inspecting the residual plots of the two regressions, it became clear that the MLPRegressor was also visually performing better than the RandomForestRegressor. It is not much, but the points are more located more densely around the red line indicating a perfect estimate. It seems to be better at predicting the higher values, whereas the low ones are sometimes predicted as negative values, which can of course never happen. 
+        </p>
+
+        <figure >
+            <img src="images/residuals.png" style="max-width: 100%">
+            <figcaption align="middle">Fig 3. - Residual plots of the two regressors.</figcaption>
+          </figure>
+
+          <BR/>
+        <h2>Final notes</h2>
+        <p align="justify">
+        Hopefully this little project proved to be interesting was interesting to you as it was to me during the process. More time, access to weather data and more complete data in general would really benefit an analysis like this. However, a lot of interesting insight came from this and a lot was learned.</p>
+        <p align="justify">
+        If you really fell like delving into the data yourself, then <a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95">here</a> is the link once again. 
+        </p>
+        <p align="justify">
+        And <a href="http://www.kristiannielsen.github.io">here</a> is a link to the Explainer Notebook that shows how the data was cleaned, how it was preprocessed for the visualizations, how the machine learnings algorithms were applied and tested, and more. Enjoy.
+        </p>
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+</html>
